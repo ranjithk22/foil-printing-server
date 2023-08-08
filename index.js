@@ -8,23 +8,23 @@ app.use(express.urlencoded({ extended: false }))
 
 
 //Routes
-app.get('/api/users', (req, res) => {
+app.get('/api/products', (req, res) => {
     res.send(users)
 })
-app.get('/api/users/:userId', (req, res) => {
+app.get('/api/products/:userId', (req, res) => {
     const id = Number(req.params.userId)
     const data = users.find(el => el.id === id)
     res.send(data)
 })
 
-app.post('/api/users/', (req, res) => {
+app.post('/api/products/', (req, res) => {
     const body = req.body
     users.push({ ...body, id: users.length + 1 })
     fs.writeFile('./Products_DB.json', JSON.stringify(users), (err, data) => {
         res.send({ status: "success", id: users.length })
     })
 })
-app.patch('/api/users/:id', (req, res) => {
+app.patch('/api/products/:id', (req, res) => {
     const body = req.body
     const id = Number(req.params.id)
     const newUsers = users.map(el => {
@@ -42,7 +42,7 @@ app.patch('/api/users/:id', (req, res) => {
     })
 })
 
-app.delete('/api/users/:id', (req, res) => {
+app.delete('/api/products/:id', (req, res) => {
     const body = req.body
     const id = Number(req.params.id)
     const newUsers = users.filter(el => el.id !== id)
