@@ -6,7 +6,9 @@ const app = express();
 // Middleware - it pass form data to body
 app.use(express.urlencoded({ extended: false }))
 
-
+app.get('/', (req, res) => {
+    res.send('Hello welcome to Foil Printing Server')
+})
 //Routes
 app.get('/api/products', (req, res) => {
     res.send(users)
