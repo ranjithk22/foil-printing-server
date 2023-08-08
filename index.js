@@ -1,6 +1,6 @@
 const express = require('express')
 const fs = require('fs')
-const users = require('./MOCK_DATA.json')
+const users = require('./Products_DB.json')
 
 const app = express();
 // Middleware - it pass form data to body
@@ -20,8 +20,8 @@ app.get('/api/users/:userId', (req, res) => {
 app.post('/api/users/', (req, res) => {
     const body = req.body
     users.push({ ...body, id: users.length + 1 })
-    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
-        res.send({ status: "success", id: users.length  })
+    fs.writeFile('./Products_DB.json', JSON.stringify(users), (err, data) => {
+        res.send({ status: "success", id: users.length })
     })
 })
 app.patch('/api/users/:id', (req, res) => {
@@ -37,8 +37,8 @@ app.patch('/api/users/:id', (req, res) => {
         }
         return el
     })
-    fs.writeFile('./MOCK_DATA.json', JSON.stringify(newUsers), (err, data) => {
-        res.send({ status: "success", id: users.length  })
+    fs.writeFile('./Products_DB.json', JSON.stringify(newUsers), (err, data) => {
+        res.send({ status: "success", id: users.length })
     })
 })
 
@@ -46,7 +46,7 @@ app.delete('/api/users/:id', (req, res) => {
     const body = req.body
     const id = Number(req.params.id)
     const newUsers = users.filter(el => el.id !== id)
-    fs.writeFile('./MOCK_DATA.json', JSON.stringify(newUsers), (err, data) => {
+    fs.writeFile('./Products_DB.json', JSON.stringify(newUsers), (err, data) => {
         res.send({ status: "success" })
     })
 })
